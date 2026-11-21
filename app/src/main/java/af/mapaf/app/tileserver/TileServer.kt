@@ -49,9 +49,21 @@ class TileServer(private val context: Context) {
 
     private val tilesOk = AtomicLong()
     private val tilesFail = AtomicLong()
+    private val fontsOk = AtomicLong()
+    private val fontsFail = AtomicLong()
+    private val spritesOk = AtomicLong()
+    private val spritesFail = AtomicLong()
+    @Volatile
+    var styleLoaded = false
+        private set
     @Volatile
     var lastError: String = ""
         private set
+
+    fun markStyleLoaded(ok: Boolean, err: String = "") {
+        styleLoaded = ok
+        if (!ok) lastError = "style: $err"
+    }
 
     private val mainHandler = Handler(Looper.getMainLooper())
 
@@ -101,8 +113,12 @@ class TileServer(private val context: Context) {
 
     fun stats(): String {
         val ready = source?.isReady() == true
-        var t = "${if (ready) "آماده" else "در حال بارگذاری"} · ✓${tilesOk.get()} ✗${tilesFail.get()}"
-        if (lastError.isNotEmpty()) t += " · $lastError"
+        var t = "${if (ready) "داده آماده" else "بارگذاری داده…"}" +
+            " · تایل ✓${tilesOk.get()} ✗${tilesFail.get()}" +
+            " · فونت ✓${fontsOk.get()} ✗${fontsFail.get()}" +
+            " · آیکون ✓${spritesOk.get()} ✗${spritesFail.get()}" +
+            " · استایل ${if (styleLoaded) "✓" else "…"}"
+        if (lastError.isNotEmpty()) t += " · خطا: $lastError"
         return t
     }
 
@@ -130,9 +146,15 @@ class TileServer(private val context: Context) {
             val out = BufferedOutputStream(socket.getOutputStream())
             when {
                 clean.startsWith("/tiles/") -> serveTile(clean, out)
-                clean.startsWith("/fonts/") -> serveAsset("fonts/" + clean.removePrefix("/fonts/").replace("%20", " ").replace(" ", "_"), "application/x-protobuf", out)
-                clean.startsWith("/sprites/") -> serveAsset("sprites/" + clean.removePrefix("/sprites/"), guessSpriteType(clean), out)
-                clean.startsWith("/data/") -> serveAsset("data/" + clean.removePrefix("/data/"), "application/json", out)
+                clean.startsWith("/fonts/") -> serveAsset(
+                    "fonts/" + clean.removePrefix("/fonts/").replace("%20", " ").replace(" ", "_"),
+                    "application/x-protobuf", out, fontsOk, fontsFail)
+                clean.startsWith("/sprites/") -> serveAsset(
+                    "sprites/" + clean.removePrefix("/sprites/"), guessSpriteType(clean),
+                    out, spritesOk, spritesFail)
+                clean.startsWith("/data/") -> serveAsset(
+                    "data/" + clean.removePrefix("/data/"), "application/json",
+                    out, spritesOk, spritesFail)
                 clean.startsWith("/stats") -> respond(out, 200, "application/json",
                     "{\"ok\":true,\"mode\":\"$mode\",\"ready\":${source?.isReady() == true},\"tiles_ok\":${tilesOk.get()},\"tiles_fail\":${tilesFail.get()}}".toByteArray())
                 clean.startsWith("/ping") -> respond(out, 200, "application/json", "{\"ok\":true}".toByteArray())
@@ -165,10 +187,10 @@ class TileServer(private val context: Context) {
         }
         tilesOk.incrementAndGet()
         lastError = ""
-        // PMTiles tiles are stored gzip-compressed — pass through with gzip encoding
+        // tiles arrive raw MVT (decompressed in PmtilesSource) — served with no
+        // Content-Encoding so every HTTP stack/decoder sees plain protobuf tiles
         val headers = "HTTP/1.1 200 OK\r\n" +
             "Content-Type: application/vnd.mapbox-vector-tile\r\n" +
-            "Content-Encoding: gzip\r\n" +
             "Content-Length: ${data.size}\r\n" +
             "Access-Control-Allow-Origin: *\r\n" +
             "Connection: close\r\n\r\n"
@@ -176,12 +198,16 @@ class TileServer(private val context: Context) {
         out.write(data)
     }
 
-    private fun serveAsset(assetPath: String, type: String, out: java.io.OutputStream) {
+    private fun serveAsset(assetPath: String, type: String, out: java.io.OutputStream,
+                           okCtr: AtomicLong, failCtr: AtomicLong) {
         try {
             val bos = ByteArrayOutputStream()
             context.assets.open(assetPath).use { it.copyTo(bos) }
             respond(out, 200, type, bos.toByteArray())
+            okCtr.incrementAndGet()
         } catch (_: Exception) {
+            failCtr.incrementAndGet()
+            lastError = "asset: $assetPath"
             respond(out, 404, "text/plain", "no asset".toByteArray())
         }
     }

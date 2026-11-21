@@ -127,7 +127,8 @@ class PmtilesSource(private val localPath: String) {
     fun minZoom() = header?.minZoom ?: 0
     fun maxZoom() = header?.maxZoom ?: 14
 
-    /** returns raw (still gzip-compressed) MVT bytes, or null */
+    /** returns MVT bytes — gzip blocks from the archive are decompressed here so the
+     *  HTTP layer always serves raw, decodable tiles (no Content-Encoding ambiguity) */
     fun tile(z: Int, x: Int, y: Int): ByteArray? {
         val cacheKey = "$z/$x/$y"
         synchronized(tileCache) { tileCache[cacheKey]?.let { return it } }
@@ -149,7 +150,10 @@ class PmtilesSource(private val localPath: String) {
                 continue
             }
             if (e.length == 0L) return null
-            val data = readBytes(h.tileOffset + e.offset, e.length)
+            var data = readBytes(h.tileOffset + e.offset, e.length)
+            if (data.size > 2 && data[0] == 0x1f.toByte() && data[1] == 0x8b.toByte()) {
+                data = gunzip(data)
+            }
             synchronized(tileCache) { tileCache[cacheKey] = data }
             return data
         }

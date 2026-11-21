@@ -235,8 +235,14 @@ class MainActivity : AppCompatActivity(), LocationListener {
                 android.content.res.Configuration.UI_MODE_NIGHT_YES
         }
         val json = StyleFactory().build(dark)
-        m.setStyle(org.maplibre.android.maps.Style.Builder().fromJson(json)) { st ->
-            addProvinceBorders(st)
+        App.instance.tileServer.markStyleLoaded(false)
+        try {
+            m.setStyle(org.maplibre.android.maps.Style.Builder().fromJson(json)) { st ->
+                App.instance.tileServer.markStyleLoaded(true)
+                addProvinceBorders(st)
+            }
+        } catch (e: Exception) {
+            App.instance.tileServer.markStyleLoaded(false, e.message ?: e.javaClass.simpleName)
         }
         if (pendingDestination == null && !cameraInitialized) {
             cameraInitialized = true
@@ -261,7 +267,8 @@ class MainActivity : AppCompatActivity(), LocationListener {
                     PropertyFactory.lineOpacity(0.8f)
                 ))
             }
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            App.instance.tileServer.markStyleLoaded(false, "provinces: ${e.message ?: e.javaClass.simpleName}")
         }
     }
 
