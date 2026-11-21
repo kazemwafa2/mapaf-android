@@ -6,45 +6,88 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#E8E4DA">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <org.maplibre.android.maps.MapView
+            android:id="@+id/map_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- ===== top area: header + search + category chips ===== -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.MaterialComponents.Dark">
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:title="@string/app_name"
-                style="@style/AppToolbar" />
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <org.maplibre.android.maps.MapView
-                android:id="@+id/map_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <!-- search pill -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:layout_gravity="top"
+                android:background="@drawable/bg_header"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
+                android:paddingStart="14dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp">
+
+                <ImageButton
+                    android:id="@+id/btn_menu"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_menu"
+                    android:contentDescription="@string/drawer_open" />
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginStart="4dp"
+                    android:src="@drawable/ic_logo"
+                    android:contentDescription="@string/app_name" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/app_name"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:maxLines="1" />
+
+                <ImageButton
+                    android:id="@+id/btn_bell"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_bell"
+                    android:contentDescription="@string/menu_about" />
+
+                <ImageButton
+                    android:id="@+id/btn_avatar"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:background="@drawable/bg_circle_button"
+                    android:src="@drawable/ic_user"
+                    android:contentDescription="@string/nav_settings" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/bg_search"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:elevation="6dp"
                 android:paddingStart="14dp"
-                android:paddingEnd="10dp"
+                android:paddingEnd="12dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp">
 
@@ -65,86 +108,215 @@
                     android:textSize="15sp"
                     android:maxLines="1"
                     android:ellipsize="end" />
-            </LinearLayout>
 
-            <!-- right-side quick buttons -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="12dp"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/btn_locate"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:src="@drawable/ic_locate"
-                    android:background="@drawable/bg_circle_button"
-                    android:elevation="6dp"
-                    android:contentDescription="@string/menu_settings" />
-
-                <ImageButton
-                    android:id="@+id/btn_layers"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_layers"
-                    android:background="@drawable/bg_circle_button"
-                    android:elevation="6dp"
-                    android:contentDescription="@string/menu_settings" />
-
-                <ImageButton
-                    android:id="@+id/btn_weather"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:layout_marginTop="10dp"
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@drawable/ic_weather"
-                    android:background="@drawable/bg_circle_button"
-                    android:elevation="6dp"
                     android:contentDescription="@string/menu_weather" />
             </LinearLayout>
 
-            <!-- status pill -->
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <HorizontalScrollView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|start"
-                android:layout_margin="12dp"
-                android:background="@drawable/bg_card"
-                android:elevation="6dp"
-                android:gravity="center_vertical"
+                android:layout_marginTop="8dp"
+                android:scrollbars="none"
                 android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp">
+                android:paddingEnd="12dp">
 
-                <View
-                    android:id="@+id/status_dot"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:background="@drawable/dot_green" />
-
-                <TextView
-                    android:id="@+id/status_text"
+                <LinearLayout
+                    android:id="@+id/chips_row"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/text_main" />
-            </LinearLayout>
+                    android:orientation="horizontal">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btn_navigate"
+                    <TextView style="@style/CategoryChip" android:id="@+id/chip_hotel" android:text="@string/chip_hotel" />
+                    <TextView style="@style/CategoryChip" android:id="@+id/chip_hospital" android:text="@string/chip_hospital" />
+                    <TextView style="@style/CategoryChip" android:id="@+id/chip_pharmacy" android:text="@string/chip_pharmacy" />
+                    <TextView style="@style/CategoryChip" android:id="@+id/chip_fuel" android:text="@string/chip_fuel" />
+                    <TextView style="@style/CategoryChip" android:id="@+id/chip_rest" android:text="@string/chip_rest" />
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+
+        <!-- weather chip -->
+        <TextView
+            android:id="@+id/weather_chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="158dp"
+            android:background="@drawable/bg_weather"
+            android:elevation="5dp"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:text="@string/weather_loading"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <!-- ===== right-side controls ===== -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="158dp"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/btn_layers"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:src="@drawable/ic_layers"
+                android:background="@drawable/bg_circle_button"
+                android:elevation="6dp"
+                android:contentDescription="@string/menu_settings" />
+
+            <ImageButton
+                android:id="@+id/btn_locate"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_locate"
+                android:background="@drawable/bg_circle_button"
+                android:elevation="6dp"
+                android:contentDescription="@string/nav_routes" />
+
+            <ImageButton
+                android:id="@+id/btn_zoom_in"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_zoom_in"
+                android:background="@drawable/bg_circle_button"
+                android:elevation="6dp"
+                android:contentDescription="@string/nav_routes" />
+
+            <ImageButton
+                android:id="@+id/btn_zoom_out"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_zoom_out"
+                android:background="@drawable/bg_circle_button"
+                android:elevation="6dp"
+                android:contentDescription="@string/nav_routes" />
+        </LinearLayout>
+
+        <!-- navigate FAB above bottom sheet -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_navigate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="14dp"
+            android:layout_marginBottom="214dp"
+            android:src="@drawable/ic_nav"
+            app:backgroundTint="@color/primary"
+            android:contentDescription="@string/nav_routes" />
+
+        <!-- ===== nearby places bottom sheet ===== -->
+        <LinearLayout
+            android:id="@+id/nearby_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="56dp"
+            android:background="@drawable/bg_sheet"
+            android:elevation="8dp"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/nearby_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/nearby_title"
+                android:textColor="@color/text_main"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:paddingBottom="6dp" />
+
+            <HorizontalScrollView
+                android:id="@+id/nearby_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+
+                <LinearLayout
+                    android:id="@+id/nearby_row"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="2dp" />
+            </HorizontalScrollView>
+        </LinearLayout>
+
+        <!-- ===== bottom navigation ===== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_gravity="bottom"
+            android:background="@color/surface"
+            android:elevation="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout style="@style/BottomNavItem" android:id="@+id/nav_home">
+                <ImageView style="@style/BottomNavIcon" android:src="@drawable/ic_home" android:contentDescription="@string/nav_home" />
+                <TextView style="@style/BottomNavLabel" android:text="@string/nav_home" />
+            </LinearLayout>
+            <LinearLayout style="@style/BottomNavItem" android:id="@+id/nav_routes">
+                <ImageView style="@style/BottomNavIcon" android:src="@drawable/ic_route" android:contentDescription="@string/nav_routes" />
+                <TextView style="@style/BottomNavLabel" android:text="@string/nav_routes" />
+            </LinearLayout>
+            <LinearLayout style="@style/BottomNavItem" android:id="@+id/nav_favorites">
+                <ImageView style="@style/BottomNavIcon" android:src="@drawable/ic_star" android:contentDescription="@string/nav_favorites" />
+                <TextView style="@style/BottomNavLabel" android:text="@string/nav_favorites" />
+            </LinearLayout>
+            <LinearLayout style="@style/BottomNavItem" android:id="@+id/nav_settings">
+                <ImageView style="@style/BottomNavIcon" android:src="@drawable/ic_gear" android:contentDescription="@string/nav_settings" />
+                <TextView style="@style/BottomNavLabel" android:text="@string/nav_settings" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- status pill (diagnostics) above bottom nav -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_marginBottom="64dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/bg_card"
+            android:elevation="9dp"
+            android:gravity="center_vertical"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp">
+
+            <View
+                android:id="@+id/status_dot"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/dot_green" />
+
+            <TextView
+                android:id="@+id/status_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="16dp"
-                android:src="@drawable/ic_nav"
-                app:backgroundTint="@color/primary"
-                android:contentDescription="@string/menu_provinces" />
-        </FrameLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                android:layout_marginStart="8dp"
+                android:textSize="11sp"
+                android:textColor="@color/text_main" />
+        </LinearLayout>
+    </FrameLayout>
 
     <!-- drawer -->
     <LinearLayout
@@ -157,7 +329,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primary"
+            android:background="@drawable/bg_header"
             android:padding="20dp"
             android:orientation="vertical">
 
@@ -172,7 +344,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="map.af · 34 ولایت"
+                android:text="۳۴ ولایت · کاملاً آفلاین"
                 android:textColor="#BBDEFB"
                 android:textSize="12sp" />
         </LinearLayout>

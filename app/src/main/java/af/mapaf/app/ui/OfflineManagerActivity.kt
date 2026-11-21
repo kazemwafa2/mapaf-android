@@ -14,7 +14,7 @@ import af.mapaf.app.data.DataManager
 /**
  * Offline package manager — download & install the Afghanistan basemap package
  * from GitHub (like Balad's OfflineMapDownloadService). Online mode streams tiles
- * from tiles.map.af; offline mode reads the installed af.pmtiles.
+ * from the user's own GitHub release; the compact basemap is bundled in the APK.
  */
 class OfflineManagerActivity : AppCompatActivity() {
 

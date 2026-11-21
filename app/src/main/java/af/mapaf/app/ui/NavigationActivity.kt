@@ -97,9 +97,7 @@ class NavigationActivity : AppCompatActivity() {
             m.uiSettings.isLogoEnabled = false
             val dark = (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) ==
                 android.content.res.Configuration.UI_MODE_NIGHT_YES
-            val mode = if (App.instance.settings.offlineInstalled && App.instance.offlineBasemapFile().exists())
-                StyleFactory.Mode.OFFLINE else StyleFactory.Mode.ONLINE
-            m.setStyle(Style.Builder().fromJson(StyleFactory().build(mode, dark))) {
+            m.setStyle(Style.Builder().fromJson(StyleFactory().build(dark))) {
                 prepareRouteLayers(it)
                 calculateRoute { r -> drawRoute(r) }
             }

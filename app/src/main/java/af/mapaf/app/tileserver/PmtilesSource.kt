@@ -1,21 +1,21 @@
 package af.mapaf.app.tileserver
 
 import java.io.RandomAccessFile
-import java.net.HttpURLConnection
-import java.net.URL
 import java.util.zip.GZIPInputStream
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 
 /**
- * PMTiles v3 archive reader — serves vector tiles (MVT) from a single file,
- * either stored locally (offline package) or streamed over HTTP Range requests
- * (online mode, exactly like map.af's own tiles.map.af delivery).
+ * PMTiles v3 archive reader — serves vector tiles (MVT) from a LOCAL file only.
+ * The app is fully independent: the compact basemap is bundled in the APK
+ * (assets/basemap/af_compact.pmtiles) and the full package is installed from the
+ * user's own GitHub release — no external tile server is contacted, ever.
  *
- * Logic mirrors the official pmtiles library (pmtiles/tile.py) and was validated
- * against af.pmtiles (16/16 random tiles byte-identical) before porting.
+ * Header layout mirrors the archive writer: magic(8) then little-endian u64 fields
+ * at 8/16/24/32/40/48/56/64, min/max zoom at 96/97. Logic follows the official
+ * pmtiles spec (columnar varint directory, gzip blocks, Hilbert tile ids).
  */
-class PmtilesSource(private val localPath: String?, val remoteUrl: String) {
+class PmtilesSource(private val localPath: String) {
 
     data class Entry(val tileId: Long, val offset: Long, val length: Long, val runLength: Long)
     data class Header(
@@ -25,7 +25,9 @@ class PmtilesSource(private val localPath: String?, val remoteUrl: String) {
         val minZoom: Int, val maxZoom: Int
     )
 
+    @Volatile
     private var header: Header? = null
+    @Volatile
     private var rootEntries: List<Entry>? = null
     private val leafCache = object : LinkedHashMap<Long, List<Entry>>(16, 0.75f, true) {
         override fun removeEldestEntry(eldest: MutableMap.MutableEntry<Long, List<Entry>>): Boolean = size > 24
@@ -35,12 +37,13 @@ class PmtilesSource(private val localPath: String?, val remoteUrl: String) {
     }
     private var localFile: RandomAccessFile? = null
 
+    fun isReady(): Boolean = header != null
+
     @Synchronized
     fun open() {
         if (header != null) return
-        if (localPath != null) {
-            localFile = RandomAccessFile(localPath, "r")
-        }
+        val f = RandomAccessFile(localPath, "r")
+        localFile = f
         val h = readBytes(8, 119)
         header = Header(
             rootOffset = h.long(0), rootLength = h.long(8),
@@ -54,37 +57,10 @@ class PmtilesSource(private val localPath: String?, val remoteUrl: String) {
     fun close() { try { localFile?.close() } catch (_: Exception) {} }
 
     private fun readBytes(offset: Long, length: Long): ByteArray {
-        val f = localFile
-        return if (f != null) {
-            val buf = ByteArray(length.toInt())
-            f.seek(offset)
-            f.readFully(buf)
-            buf
-        } else {
-            val url = URL(remoteUrl)
-            var attempt = 0
-            while (true) {
-                attempt++
-                try {
-                    val conn = (url.openConnection() as HttpURLConnection).apply {
-                        setRequestProperty("Range", "bytes=$offset-${offset + length - 1}")
-                        setRequestProperty("User-Agent", USER_AGENT)
-                        connectTimeout = 20000
-                        readTimeout = 30000
-                    }
-                    val code = conn.responseCode
-                    if (code == 200 || code == 206) {
-                        return conn.inputStream.use { it.readBytes() }
-                    }
-                    conn.disconnect()
-                    if (attempt >= 3) throw java.io.IOException("HTTP $code for range $offset+$length")
-                } catch (e: Exception) {
-                    if (attempt >= 3) throw e
-                }
-                Thread.sleep(300L * attempt)
-            }
-            @Suppress("UNREACHABLE_CODE") ByteArray(0)
-        }
+        val buf = ByteArray(length.toInt())
+        localFile?.seek(offset)
+        localFile?.readFully(buf)
+        return buf
     }
 
     private fun ByteArray.long(off: Int): Long {
@@ -181,8 +157,6 @@ class PmtilesSource(private val localPath: String?, val remoteUrl: String) {
     }
 
     companion object {
-        const val USER_AGENT = "mapaf-android/1.0"
-
         /** PMTiles Hilbert curve tile id (mirrors official zxy_to_tileid) */
         fun zxyToTileId(z: Int, x: Int, y: Int): Long {
             var xx = x.toLong(); var yy = y.toLong()

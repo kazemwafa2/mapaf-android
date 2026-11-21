@@ -20,6 +20,56 @@
         <item name="android:padding">12dp</item>
     </style>
 
+    <style name="CategoryChip">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_chip</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:textColor">@color/text_main</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BottomNavItem">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="BottomNavIcon">
+        <item name="android:layout_width">22dp</item>
+        <item name="android:layout_height">22dp</item>
+    </style>
+
+    <style name="BottomNavLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="NearbyCard">
+        <item name="android:layout_width">128dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_chip</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:elevation">3dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
     <style name="MenuItem">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

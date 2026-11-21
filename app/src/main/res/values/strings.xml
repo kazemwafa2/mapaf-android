@@ -8,7 +8,9 @@
     <string name="tap_set_dest">این نقطه به عنوان مقصد ثبت شد — دکمه مسیریابی را بزنید</string>
     <string name="no_destination">نخست مقصد را انتخاب کنید (جستجو یا لمس روی نقشه)</string>
 
-    <string name="mode_online">حالت آنلاین — داده از tiles.map.af</string>
+    <string name="mode_compact">نقشهٔ آفلاین داخلی (z0-12) · </string>
+    <string name="mode_full">نقشهٔ آفلاین کامل (z0-14) · </string>
+    <string name="mode_no_basemap">باز در حال آماده‌سازی…</string>
     <string name="mode_offline">حالت آفلاین — بسته نصب‌شده از گیت‌هاب</string>
     <string name="mode_no_data">دسترسی به داده نیست — بسته آفلاین را نصب کنید</string>
 
@@ -17,14 +19,14 @@
     <string name="menu_offline">مدیریت بسته آفلاین</string>
     <string name="menu_weather">آب و هوا</string>
     <string name="menu_settings">تنظیمات</string>
-    <string name="menu_about">درباره map.af</string>
+    <string name="menu_about">درباره برنامه</string>
 
     <string name="back">بازگشت</string>
 
     <!-- navigation -->
     <string name="nav_active">در مسیر…</string>
     <string name="eta_format">مانده: %1$s · زمان: %2$s</string>
-    <string name="approx_note">مسیر تقریبی است — برای مسیر دقیق دسترسی API مسیریابی map.af لازم است</string>
+    <string name="approx_note">مسیر روی دادهٔ آفلاین داخلی محاسبه می‌شود — تقریبی است</string>
     <string name="stop_nav">پایان مسیریابی</string>
     <string name="sound_on">صدا روشن شد</string>
     <string name="sound_off">صدا خاموش شد</string>
@@ -39,7 +41,7 @@
 
     <!-- offline manager -->
     <string name="offline_title">بسته آفلاین نقشه</string>
-    <string name="offline_not_installed">بسته آفلاین نصب نیست. نقشه از اینترنت (tiles.map.af) بار می‌شود.</string>
+    <string name="offline_not_installed">بستهٔ کامل آفلاین نصب نیست. نقشه با بستهٔ داخلی فشرده کار می‌کند؛ برای جزئیات کامل بسته را نصب کنید.</string>
     <string name="offline_installed_status">نصب‌شده: نسخه %1$s · %2$s مگابایت</string>
     <string name="check_now">بررسی نسخه جدید</string>
     <string name="checking">در حال بررسی…</string>
@@ -95,4 +97,18 @@
     <string name="no_result">موردی نیست</string>
 <string name="remove_package">حذف بسته آفلاین</string>
     <string name="crash_no_log">No crash log found</string>
+    <string name="nearby_title">مکان‌های نزدیک</string>
+    <string name="nearby_empty">مکانی در نزدیکی یافت نشد</string>
+    <string name="chip_hotel">هوتل</string>
+    <string name="chip_hospital">شفاخانه</string>
+    <string name="chip_pharmacy">دواخانه</string>
+    <string name="chip_fuel">تاکتی نیل</string>
+    <string name="chip_rest">رستورانت</string>
+    <string name="nav_home">خانه</string>
+    <string name="nav_routes">مسیرها</string>
+    <string name="nav_favorites">علاقه‌مندی‌ها</string>
+    <string name="nav_settings">تنظیمات</string>
+    <string name="favorites_title">مکان‌های ثبت‌شده</string>
+    <string name="favorites_hint">برای انتخاب مقصد روی هر مکان بزنید</string>
+    <string name="routes_need_dest">نخست مقصد را انتخاب کنید</string>
 </resources>

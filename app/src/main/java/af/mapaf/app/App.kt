@@ -23,41 +23,56 @@ class App : Application() {
         installCrashReporter()
         settings = Settings(this)
         tileServer = TileServer(this)
-        restartTileServer()
-        loadGraph()
+        prepareBasemaps()
     }
 
-    /** online = stream tiles from tiles.map.af (HTTP Range); offline = installed package */
-    fun restartTileServer() {
-        val offlineFile = offlineBasemapFile()
-        val useOffline = settings.offlineInstalled && offlineFile.exists() && offlineFile.length() > 1000
-        tileServer.start(if (useOffline) offlineFile.absolutePath else null)
-    }
-
+    /** full offline package (z0-14) installed from the user's GitHub release */
     fun offlineBasemapFile(): File {
         val dir = File(filesDir, "offline")
         if (!dir.exists()) dir.mkdirs()
         return File(dir, "af.pmtiles")
     }
 
-    /** routing graph: installed package version first, then the bundled asset */
-    private fun loadGraph() {
+    /** compact basemap (z0-12) bundled in the APK — copied to filesDir on first run */
+    fun compactBasemapFile(): File {
+        val dir = File(filesDir, "basemap")
+        if (!dir.exists()) dir.mkdirs()
+        return File(dir, "af_compact.pmtiles")
+    }
+
+    /**
+     * Copy the bundled compact basemap on a worker thread, then start the tile
+     * server against it (or against the installed full package when present).
+     * The app is 100% offline — only local files are read.
+     */
+    private fun prepareBasemaps() {
         Thread {
-            val installed = File(filesDir, "offline/routing_graph.bin")
-            if (installed.exists() && installed.length() > 1000 && graph.load(installed)) {
-                return@Thread
-            }
             try {
-                val cache = File(filesDir, "routing_graph.bin")
-                if (!cache.exists() || cache.length() < 1000) {
-                    assets.open("graph/routing_graph.bin").use { input ->
-                        cache.outputStream().use { output -> input.copyTo(output) }
+                val c = compactBasemapFile()
+                if (!c.exists() || c.length() < 1_000_000) {
+                    assets.open("basemap/af_compact.pmtiles").use { input ->
+                        c.outputStream().use { output -> input.copyTo(output) }
                     }
                 }
-                graph.load(cache)
             } catch (_: Exception) {
             }
+            restartTileServer()
         }.start()
+    }
+
+    /** compact = bundled basemap; full = installed package (when valid) */
+    fun restartTileServer() {
+        val full = offlineBasemapFile()
+        tileServer.start(
+            compactBasemapFile().absolutePath,
+            if (settings.offlineInstalled && full.exists() && full.length() > 1_000_000) full.absolutePath else null
+        )
+    }
+
+    fun isOnline(): Boolean {
+        val cm = getSystemService(CONNECTIVITY_SERVICE) as android.net.ConnectivityManager
+        val caps = cm.getNetworkCapabilities(cm.activeNetwork) ?: return false
+        return caps.hasCapability(android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 
     /** write stacktrace + show it on screen so the user can screenshot the exact error */
@@ -75,12 +90,6 @@ class App : Application() {
             }
             def?.uncaughtException(t, e)
         }
-    }
-
-    fun isOnline(): Boolean {
-        val cm = getSystemService(CONNECTIVITY_SERVICE) as android.net.ConnectivityManager
-        val caps = cm.getNetworkCapabilities(cm.activeNetwork) ?: return false
-        return caps.hasCapability(android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 
     companion object {

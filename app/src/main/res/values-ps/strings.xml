@@ -8,7 +8,9 @@
     <string name="tap_set_dest">دا ټکی د موخې په توګه ثبت شو — د لارې ښوونې تڼۍ کېکاږئ</string>
     <string name="no_destination">لومړی موخه وټاکئ (لټون یا په نقشه ټکول)</string>
 
-    <string name="mode_online">آنلاین حالت — ډاټا له tiles.map.af</string>
+    <string name="mode_compact">داخلي افلاین نقشه (z0-12) · </string>
+    <string name="mode_full">مکمل افلاین نقشه (z0-14) · </string>
+    <string name="mode_no_basemap">د نقشې معلومات چمتو کیږي…</string>
     <string name="mode_offline">آفلاین حالت — له GitHub څخه نصب شوی بنډل</string>
     <string name="mode_no_data">ډاټا ته لاسرسی نشته — آفلاین بنډل نصب کړئ</string>
 
@@ -36,7 +38,7 @@
     <string name="empty_search">پایله ونه موندل شوه</string>
 
     <string name="offline_title">د نقشې آفلاین بنډل</string>
-    <string name="offline_not_installed">آفلاین بنډل نصب ندی. نقشه له انټرنټ (tiles.map.af) راځي.</string>
+    <string name="offline_not_installed">مکمل افلاین بنډل نصب ندی. نقشه له داخلي بنډل کار کوي؛ د بشپړ تفصیل لپاره بنډل نصب کړئ.</string>
     <string name="offline_installed_status">نصب شوی: نسخه %1$s · %2$s MB</string>
     <string name="check_now">نوی نسخه وګورئ</string>
     <string name="checking">برسېرول…</string>
@@ -87,4 +89,18 @@
     <string name="pc_search_hint">پوستی کوډ یا د سیمې نوم…</string>
     <string name="no_result">هیڅ نشته</string>
 <string name="remove_package">آفلاین بنډل ښکته کول</string>
+    <string name="nearby_title">نږدې ځایونه</string>
+    <string name="nearby_empty">نږدې ځای ونه موندل شو</string>
+    <string name="chip_hotel">هوټل</string>
+    <string name="chip_hospital">روغتون</string>
+    <string name="chip_pharmacy">درملتون</string>
+    <string name="chip_fuel">د تیلو ټانکي</string>
+    <string name="chip_rest">رسټورانت</string>
+    <string name="nav_home">کور</string>
+    <string name="nav_routes">لارې</string>
+    <string name="nav_favorites">خوښې</string>
+    <string name="nav_settings">امستنې</string>
+    <string name="favorites_title">ثبت شوي ځایونه</string>
+    <string name="favorites_hint">د منزل غوره کولو لپاره پر هر ځای کلیک کړئ</string>
+    <string name="routes_need_dest">لومړی منزل غوره کړئ</string>
 </resources>

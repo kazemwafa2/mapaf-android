@@ -34,13 +34,10 @@ class Settings(context: Context) {
         set(v) = sp.edit().putBoolean(KEY_SIM, v).apply()
 
     /** GitHub raw base URL hosting the offline package (user configures after upload) */
+    /** GitHub release of the user's own offline-data repo (the only remote endpoint) */
     var dataRepoBase: String
         get() = sp.getString(KEY_REPO_BASE, DEFAULT_REPO_BASE) ?: DEFAULT_REPO_BASE
         set(v) = sp.edit().putString(KEY_REPO_BASE, v.trimEnd('/')).apply()
-
-    var mapafApiBase: String
-        get() = sp.getString(KEY_API_BASE, "https://map.af") ?: "https://map.af"
-        set(v) = sp.edit().putString(KEY_API_BASE, v.trimEnd('/')).apply()
 
     /** installed offline package version, empty = not installed */
     var offlineVersion: String
@@ -59,9 +56,8 @@ class Settings(context: Context) {
         const val KEY_VOICE_LANG = "voice_lang"
         const val KEY_SIM = "simulation"
         const val KEY_REPO_BASE = "repo_base"
-        const val KEY_API_BASE = "api_base"
         const val KEY_OFFLINE_VER = "offline_version"
         const val KEY_OFFLINE_ON = "offline_on"
-        const val DEFAULT_REPO_BASE = "https://github.com/YOUR-USERNAME/mapaf-offline-data/releases/download/v1.0"
+        const val DEFAULT_REPO_BASE = "https://github.com/kazemwafa2/mapaf-offline-data/releases/download/v1.0"
     }
 }

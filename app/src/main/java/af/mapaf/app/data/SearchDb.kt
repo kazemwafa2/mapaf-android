@@ -94,8 +94,65 @@ class SearchDb {
         }
     }
 
+    // ---- registered places (map.af scraped POIs — 404 rows, bundled offline) ----
+
+    private var regDb: SQLiteDatabase? = null
+
+    @Synchronized
+    private fun reg(): SQLiteDatabase? {
+        regDb?.let { return it }
+        return try {
+            val target = File(App.instance.filesDir, "registered_places.db")
+            if (!target.exists() || target.length() < 500) {
+                App.instance.assets.open("data/registered_places.db").use { input ->
+                    target.outputStream().use { output -> input.copyTo(output) }
+                }
+            }
+            SQLiteDatabase.openDatabase(target.absolutePath, null, SQLiteDatabase.OPEN_READONLY)
+                .also { regDb = it }
+        } catch (_: Exception) { null }
+    }
+
+    private fun regRow(c: android.database.Cursor): Row = Row(
+        c.getString(0), c.getString(1) ?: "", c.getString(2) ?: "",
+        c.getDouble(3), c.getDouble(4), c.getString(5) ?: ""
+    )
+
+    /** nearest registered places to a point, optionally filtered by kind (Hotel, Hospital…) */
+    fun near(lat: Double, lng: Double, kind: String?): List<Row> {
+        val d = reg() ?: return emptyList()
+        val out = ArrayList<Row>()
+        try {
+            val sel = ("SELECT name,name_en,kind,lat,lng,IFNULL(locality,'') FROM places " +
+                (if (kind != null) "WHERE kind = ? " else "") +
+                "ORDER BY ((lat - ?) * (lat - ?)) + (((lng - ?) * 0.83) * ((lng - ?) * 0.83)) LIMIT 20")
+            val args = if (kind != null)
+                arrayOf(kind, lat.toString(), lat.toString(), lng.toString(), lng.toString())
+            else arrayOf(lat.toString(), lat.toString(), lng.toString(), lng.toString())
+            d.rawQuery(sel, args).use { c ->
+                while (c.moveToNext()) out.add(regRow(c))
+            }
+        } catch (_: Exception) {}
+        return out
+    }
+
+    /** all registered places (favorites list) */
+    fun registeredAll(limit: Int = 300): List<Row> {
+        val d = reg() ?: return emptyList()
+        val out = ArrayList<Row>()
+        try {
+            d.rawQuery(
+                "SELECT name,name_en,kind,lat,lng,IFNULL(locality,'') FROM places " +
+                    "ORDER BY name LIMIT ?", arrayOf(limit.toString())).use { c ->
+                while (c.moveToNext()) out.add(regRow(c))
+            }
+        } catch (_: Exception) {}
+        return out
+    }
+
     fun close() {
         try { db?.close() } catch (_: Exception) {}
+        try { regDb?.close() } catch (_: Exception) {}
         db = null
     }
 }
