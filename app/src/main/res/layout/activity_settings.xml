@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/bg">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:paddingBottom="24dp">
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:background="@color/primary" android:gravity="center_vertical"
+            android:padding="10dp" android:orientation="horizontal">
+            <ImageButton android:id="@+id/btn_back" android:layout_width="40dp" android:layout_height="40dp"
+                android:src="@drawable/ic_back" android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/back"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="@string/settings_title" android:textColor="#FFFFFF" android:textSize="17sp"
+                android:layout_marginStart="8dp" android:textStyle="bold"/>
+        </LinearLayout>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_margin="16dp" android:text="@string/lang_label" style="@style/ListHeader"/>
+        <RadioGroup android:id="@+id/radio_lang" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginStart="24dp" android:orientation="horizontal">
+            <RadioButton android:id="@+id/lang_fa" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="@string/lang_fa" android:checked="true"/>
+            <RadioButton android:id="@+id/lang_ps" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="@string/lang_ps"/>
+            <RadioButton android:id="@+id/lang_en" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="@string/lang_en"/>
+        </RadioGroup>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_margin="16dp" android:text="@string/voice_lang_label" style="@style/ListHeader"/>
+        <RadioGroup android:id="@+id/radio_voice_lang" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginStart="24dp" android:orientation="horizontal">
+            <RadioButton android:id="@+id/vlang_fa" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="@string/lang_fa" android:checked="true"/>
+            <RadioButton android:id="@+id/vlang_ps" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="@string/lang_ps"/>
+            <RadioButton android:id="@+id/vlang_en" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="@string/lang_en"/>
+        </RadioGroup>
+
+        <androidx.appcompat.widget.SwitchCompat android:id="@+id/switch_voice"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_margin="16dp" android:text="@string/voice_label" android:textColor="@color/text_main"/>
+        <androidx.appcompat.widget.SwitchCompat android:id="@+id/switch_chimes"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
+            android:text="@string/chimes_label" android:textColor="@color/text_main"/>
+        <androidx.appcompat.widget.SwitchCompat android:id="@+id/switch_sim"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_margin="16dp" android:text="@string/sim_label" android:textColor="@color/text_main"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_margin="16dp" android:text="@string/repo_label" style="@style/ListHeader"/>
+        <EditText android:id="@+id/repo_base" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
+            android:inputType="textUri" android:textSize="12sp" android:importantForAutofill="no"/>
+        <TextView android:id="@+id/btn_save_repo" style="@style/PillButton"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_margin="16dp" android:text="@string/save_repo"/>
+    </LinearLayout>
+</ScrollView>

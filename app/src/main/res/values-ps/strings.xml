@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">د افغانستان نقشه</string>
+    <string name="drawer_open">مینو</string>
+    <string name="drawer_close">بندول</string>
+    <string name="search_hint">ځای، پته، پوستی کوډ لټول…</string>
+    <string name="tap_point">غوره شوی ټکی</string>
+    <string name="tap_set_dest">دا ټکی د موخې په توګه ثبت شو — د لارې ښوونې تڼۍ کېکاږئ</string>
+    <string name="no_destination">لومړی موخه وټاکئ (لټون یا په نقشه ټکول)</string>
+
+    <string name="mode_online">آنلاین حالت — ډاټا له tiles.map.af</string>
+    <string name="mode_offline">آفلاین حالت — له GitHub څخه نصب شوی بنډل</string>
+    <string name="mode_no_data">ډاټا ته لاسرسی نشته — آفلاین بنډل نصب کړئ</string>
+
+    <string name="menu_provinces">ولایتونه (۳۴)</string>
+    <string name="menu_postcodes">پوستی کوډونه</string>
+    <string name="menu_offline">د آفلاین بنډل مدیریت</string>
+    <string name="menu_weather">هوا</string>
+    <string name="menu_settings">سمونې</string>
+    <string name="menu_about">د map.af پېژندنه</string>
+
+    <string name="back">بېرته</string>
+
+    <string name="nav_active">په لاره کې…</string>
+    <string name="eta_format">پاتې: %1$s · وخت: %2$s</string>
+    <string name="approx_note">لار تقریبي ده — د دقیقې لارې لپاره د map.af د routing API لاسرسی اړین دی</string>
+    <string name="stop_nav">د لارې ښوونې پای</string>
+    <string name="sound_on">غږ روښانه شو</string>
+    <string name="sound_off">غږ تړل شو</string>
+    <string name="sim_on">ازمویښت حالت (سییمولیشن) فعال شو</string>
+    <string name="sim_off">ازمویښت حالت بند شو — له GPS کار اخیستل کیږي</string>
+    <string name="need_location_perm">د حقیقي لارې لپاره د موقعیت اجازه اړینه ده. کولی شئ د ازمویښت حالت وکاروئ.</string>
+    <string name="notif_channel_nav">لارښوونه</string>
+    <string name="notif_navigating">په لارښوونه کې…</string>
+
+    <string name="empty_search">پایله ونه موندل شوه</string>
+
+    <string name="offline_title">د نقشې آفلاین بنډل</string>
+    <string name="offline_not_installed">آفلاین بنډل نصب ندی. نقشه له انټرنټ (tiles.map.af) راځي.</string>
+    <string name="offline_installed_status">نصب شوی: نسخه %1$s · %2$s MB</string>
+    <string name="check_now">نوی نسخه وګورئ</string>
+    <string name="checking">برسېرول…</string>
+    <string name="manifest_found">نسخه %1$s · %2$d فایلونه · %3$s MB ډاونلوډ چمتو دی</string>
+    <string name="manifest_error">MANIFEST ترلاسه نشو</string>
+    <string name="install_now">بنډل ډاونلوډ او نصب کړئ</string>
+    <string name="install_done_btn">نصب شو — بیا وګورئ</string>
+    <string name="install_error">نصب ناکام شو</string>
+    <string name="offline_installed_toast">آفلاین بنډل نصب او فعال شو ✓</string>
+    <string name="offline_removed">آفلاین بنډل له منځه یوړل شو</string>
+    <string name="download_progress">فایل %1$d له %2$d: %3$s — %4$d%%</string>
+    <string name="offline_switch">د آفلاین نقشه کارول (کله چې نصب وي)</string>
+    <string name="repo_hint_label">د بنډل پته په GitHub:</string>
+
+    <string name="weather_default_place">کابل</string>
+    <string name="weather_loading">د هوا حالت ترلاسه کول…</string>
+    <string name="weather_offline">د هوا لپاره انټرنټ اړین دی (MET Norway خدمت).</string>
+    <string name="weather_error">د هوا حالت ترلاسه نشو.</string>
+    <string name="weather_updated">د هوا حالت نوی شو</string>
+    <string name="weather_source">سرچینه: MET Norway Locationforecast 2.0 — هماغه سرچینه چې په map.af کې څرګنده ده</string>
+
+    <string name="settings_title">سمونې</string>
+    <string name="lang_label">د اپلیکیشن ژبه</string>
+    <string name="lang_fa">دري</string>
+    <string name="lang_ps">پښتو</string>
+    <string name="lang_en">English</string>
+    <string name="voice_lang_label">د غږیزې لارښوونې ژبه</string>
+    <string name="voice_label">غږیزه لارښوونه</string>
+    <string name="chimes_label">خبرتیا غږونه (څرخ او رسیدن زنګ)</string>
+    <string name="sim_label">د لارې ازمویښت حالت (له GPS پرته)</string>
+    <string name="repo_label">د آفلاین بنډل پته په GitHub کې</string>
+    <string name="save_repo">پته خوندي کړئ</string>
+    <string name="repo_saved">پته خوندي شوه</string>
+    <string name="restart_hint">د ژبې د پلي کولو لپاره اپلیکیشن بیا پرانیزئ</string>
+
+    <string name="about_title">د map.af پېژندنه</string>
+    <string name="about_stats_title">رسمي شمېرې چې map.af خپروي</string>
+    <string name="stat_registered_places_label">ثبت شوي ځایونه</string>
+    <string name="stat_buildings_label">ودانیزې په نقشه</string>
+    <string name="stat_addressed_label">ودانیزې پته لري</string>
+    <string name="stat_streets_label">نومولې سړکونه</string>
+    <string name="stat_postcodes_label">پوستی کوډونه</string>
+    <string name="stat_provinces_label">د افغانستان ولایتونه</string>
+    <string name="about_attribution">د ډاټا سرچینې: OpenStreetMap (ODbL) · Microsoft Building Footprints (ODbL) · GeoNames (CC BY 4.0) · د افغانستان پوست له لارې map.af · MET Norway · geoBoundaries. نقشه د MapLibre او OpenMapTiles له لارې جوړ شوی. د افغانستان نقشه مالک: Ghoncha Online Services (ghoncha.com) — info@map.af — وټساپ ‎+93 74 992 1355</string>
+    <string name="app_version_line">د اپلیکیشن نسخه %1$s · د آفلاین بنډل نسخه: %2$s</string>
+
+    <string name="select_province">ولایت وټاکئ</string>
+    <string name="pc_search_hint">پوستی کوډ یا د سیمې نوم…</string>
+    <string name="no_result">هیڅ نشته</string>
+<string name="remove_package">آفلاین بنډل ښکته کول</string>
+</resources>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">نقشه افغانستان</string>
+    <string name="drawer_open">منو</string>
+    <string name="drawer_close">بستن</string>
+    <string name="search_hint">جستجوی مکان، آدرس، کد پستی…</string>
+    <string name="tap_point">نقطه انتخابی</string>
+    <string name="tap_set_dest">این نقطه به عنوان مقصد ثبت شد — دکمه مسیریابی را بزنید</string>
+    <string name="no_destination">نخست مقصد را انتخاب کنید (جستجو یا لمس روی نقشه)</string>
+
+    <string name="mode_online">حالت آنلاین — داده از tiles.map.af</string>
+    <string name="mode_offline">حالت آفلاین — بسته نصب‌شده از گیت‌هاب</string>
+    <string name="mode_no_data">دسترسی به داده نیست — بسته آفلاین را نصب کنید</string>
+
+    <string name="menu_provinces">ولایات (۳۴)</string>
+    <string name="menu_postcodes">کدهای پستی</string>
+    <string name="menu_offline">مدیریت بسته آفلاین</string>
+    <string name="menu_weather">آب و هوا</string>
+    <string name="menu_settings">تنظیمات</string>
+    <string name="menu_about">درباره map.af</string>
+
+    <string name="back">بازگشت</string>
+
+    <!-- navigation -->
+    <string name="nav_active">در مسیر…</string>
+    <string name="eta_format">مانده: %1$s · زمان: %2$s</string>
+    <string name="approx_note">مسیر تقریبی است — برای مسیر دقیق دسترسی API مسیریابی map.af لازم است</string>
+    <string name="stop_nav">پایان مسیریابی</string>
+    <string name="sound_on">صدا روشن شد</string>
+    <string name="sound_off">صدا خاموش شد</string>
+    <string name="sim_on">حالت آزمایشی (شبیه‌سازی) فعال شد</string>
+    <string name="sim_off">حالت آزمایشی خاموش شد — از GPS استفاده می‌شود</string>
+    <string name="need_location_perm">برای مسیریابی واقعی، دسترسی موقعیت لازم است. می‌توانید از حالت آزمایشی استفاده کنید.</string>
+    <string name="notif_channel_nav">مسیریابی</string>
+    <string name="notif_navigating">در حال مسیریابی…</string>
+
+    <!-- search -->
+    <string name="empty_search">نتیجه‌ای یافت نشد</string>
+
+    <!-- offline manager -->
+    <string name="offline_title">بسته آفلاین نقشه</string>
+    <string name="offline_not_installed">بسته آفلاین نصب نیست. نقشه از اینترنت (tiles.map.af) بار می‌شود.</string>
+    <string name="offline_installed_status">نصب‌شده: نسخه %1$s · %2$s مگابایت</string>
+    <string name="check_now">بررسی نسخه جدید</string>
+    <string name="checking">در حال بررسی…</string>
+    <string name="manifest_found">نسخه %1$s · %2$d فایل · %3$s مگابایت آماده دانلود است</string>
+    <string name="manifest_error">دریافت MANIFEST ناموفق بود</string>
+    <string name="install_now">دانلود و نصب بسته</string>
+    <string name="install_done_btn">نصب شد — دوباره بررسی کنید</string>
+    <string name="install_error">نصب ناموفق بود</string>
+    <string name="offline_installed_toast">بسته آفلاین نصب شد و فعال گردید ✓</string>
+    <string name="offline_removed">بسته آفلاین حذف شد</string>
+    <string name="download_progress">فایل %1$d از %2$d: %3$s — %4$d%%</string>
+    <string name="offline_switch">استفاده از نقشه آفلاین (وقتی نصب باشد)</string>
+    <string name="repo_hint_label">نشانی بسته روی گیت‌هاب:</string>
+
+    <!-- weather -->
+    <string name="weather_default_place">کابل</string>
+    <string name="weather_loading">در حال دریافت وضع هوا…</string>
+    <string name="weather_offline">برای آب و هوا به اینترنت نیاز است (سرویس MET Norway).</string>
+    <string name="weather_error">دریافت وضع هوا ناموفق بود.</string>
+    <string name="weather_updated">وضع هوا تازه شد</string>
+    <string name="weather_source">منبع: MET Norway Locationforecast 2.0 — همان منبع اعلام‌شده در map.af</string>
+
+    <!-- settings -->
+    <string name="settings_title">تنظیمات</string>
+    <string name="lang_label">زبان برنامه</string>
+    <string name="lang_fa">دری</string>
+    <string name="lang_ps">پښتو</string>
+    <string name="lang_en">English</string>
+    <string name="voice_lang_label">زبان راهنمای صوتی</string>
+    <string name="voice_label">راهنمای صوتی مسیریابی</string>
+    <string name="chimes_label">صداهای هشدار (زنگ پیچ و رسیدن)</string>
+    <string name="sim_label">حالت آزمایشی مسیریابی (بدون GPS)</string>
+    <string name="repo_label">نشانی بسته آفلاین در گیت‌هاب</string>
+    <string name="save_repo">ذخیره نشانی</string>
+    <string name="repo_saved">نشانی ذخیره شد</string>
+    <string name="restart_hint">برای اعمال زبان، برنامه را دوباره باز کنید</string>
+
+    <!-- about -->
+    <string name="about_title">درباره map.af</string>
+    <string name="about_stats_title">آمار رسمی منتشرشده توسط map.af</string>
+    <string name="stat_registered_places_label">جای ثبت‌شده</string>
+    <string name="stat_buildings_label">ساختمان روی نقشه</string>
+    <string name="stat_addressed_label">ساختمان دارای آدرس</string>
+    <string name="stat_streets_label">سرک نام‌گذاری‌شده</string>
+    <string name="stat_postcodes_label">کد پستی</string>
+    <string name="stat_provinces_label">ولایت افغانستان</string>
+    <string name="about_attribution">منابع داده: OpenStreetMap (ODbL) · Microsoft Building Footprints (ODbL) · GeoNames (CC BY 4.0) · پست افغانستان از طریق map.af · MET Norway · geoBoundaries. نقشه با MapLibre و قالب OpenMapTiles ساخته شده است. مالک نقشه افغانستان: خدمات آنلاین غنچه (ghoncha.com) — info@map.af — واتساپ ‎+93 74 992 1355</string>
+    <string name="app_version_line">نسخه برنامه %1$s · نسخه بسته آفلاین: %2$s</string>
+
+    <!-- misc -->
+    <string name="select_province">انتخاب ولایت</string>
+    <string name="pc_search_hint">کد پستی یا نام ساحه…</string>
+    <string name="no_result">موردی نیست</string>
+<string name="remove_package">حذف بسته آفلاین</string>
+    <string name="crash_no_log">No crash log found</string>
+</resources>

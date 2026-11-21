@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@string/app_name"
+                style="@style/AppToolbar" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <org.maplibre.android.maps.MapView
+                android:id="@+id/map_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <!-- search pill -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:layout_gravity="top"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_search"
+                android:gravity="center_vertical"
+                android:elevation="6dp"
+                android:paddingStart="14dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_search"
+                    android:contentDescription="@string/search_hint" />
+
+                <TextView
+                    android:id="@+id/search_box"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/search_hint"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="15sp"
+                    android:maxLines="1"
+                    android:ellipsize="end" />
+            </LinearLayout>
+
+            <!-- right-side quick buttons -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="12dp"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btn_locate"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:src="@drawable/ic_locate"
+                    android:background="@drawable/bg_circle_button"
+                    android:elevation="6dp"
+                    android:contentDescription="@string/menu_settings" />
+
+                <ImageButton
+                    android:id="@+id/btn_layers"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_layers"
+                    android:background="@drawable/bg_circle_button"
+                    android:elevation="6dp"
+                    android:contentDescription="@string/menu_settings" />
+
+                <ImageButton
+                    android:id="@+id/btn_weather"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_weather"
+                    android:background="@drawable/bg_circle_button"
+                    android:elevation="6dp"
+                    android:contentDescription="@string/menu_weather" />
+            </LinearLayout>
+
+            <!-- status pill -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|start"
+                android:layout_margin="12dp"
+                android:background="@drawable/bg_card"
+                android:elevation="6dp"
+                android:gravity="center_vertical"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+
+                <View
+                    android:id="@+id/status_dot"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="@drawable/dot_green" />
+
+                <TextView
+                    android:id="@+id/status_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_main" />
+            </LinearLayout>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_navigate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_nav"
+                app:backgroundTint="@color/primary"
+                android:contentDescription="@string/menu_provinces" />
+        </FrameLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <!-- drawer -->
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/surface"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary"
+            android:padding="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="map.af · 34 ولایت"
+                android:textColor="#BBDEFB"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView style="@style/MenuItem" android:id="@+id/menu_provinces" android:text="@string/menu_provinces" />
+        <TextView style="@style/MenuItem" android:id="@+id/menu_postcodes" android:text="@string/menu_postcodes" />
+        <TextView style="@style/MenuItem" android:id="@+id/menu_offline" android:text="@string/menu_offline" />
+        <TextView style="@style/MenuItem" android:id="@+id/menu_weather" android:text="@string/menu_weather" />
+        <TextView style="@style/MenuItem" android:id="@+id/menu_settings" android:text="@string/menu_settings" />
+        <TextView style="@style/MenuItem" android:id="@+id/menu_about" android:text="@string/menu_about" />
+
+        <View android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/about_attribution"
+            android:textSize="9sp"
+            android:textColor="@color/text_secondary" />
+    </LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

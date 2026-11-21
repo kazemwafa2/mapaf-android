@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/bg">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:paddingBottom="24dp">
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:background="@color/primary" android:gravity="center_vertical"
+            android:padding="10dp" android:orientation="horizontal">
+            <ImageButton android:id="@+id/btn_back" android:layout_width="40dp" android:layout_height="40dp"
+                android:src="@drawable/ic_back" android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/back"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="@string/about_title" android:textColor="#FFFFFF" android:textSize="17sp"
+                android:layout_marginStart="8dp" android:textStyle="bold"/>
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_margin="16dp" android:text="@string/about_stats_title" style="@style/ListHeader"/>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_card" android:orientation="vertical" android:padding="16dp">
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical">
+                    <TextView android:id="@+id/stat_registered_places" style="@style/StatValue" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                    <TextView android:text="@string/stat_registered_places_label" style="@style/StatLabel" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical">
+                    <TextView android:id="@+id/stat_buildings" style="@style/StatValue" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                    <TextView android:text="@string/stat_buildings_label" style="@style/StatLabel" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="14dp">
+                <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical">
+                    <TextView android:id="@+id/stat_addressed" style="@style/StatValue" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                    <TextView android:text="@string/stat_addressed_label" style="@style/StatLabel" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical">
+                    <TextView android:id="@+id/stat_streets" style="@style/StatValue" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                    <TextView android:text="@string/stat_streets_label" style="@style/StatLabel" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="14dp">
+                <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical">
+                    <TextView android:id="@+id/stat_postcodes" style="@style/StatValue" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                    <TextView android:text="@string/stat_postcodes_label" style="@style/StatLabel" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical">
+                    <TextView android:id="@+id/stat_provinces" style="@style/StatValue" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                    <TextView android:text="@string/stat_provinces_label" style="@style/StatLabel" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView android:id="@+id/app_version" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_margin="16dp" android:textSize="12sp" android:textColor="@color/text_secondary"/>
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
+            android:text="@string/about_attribution" android:textSize="11sp"
+            android:textColor="@color/text_secondary" android:lineSpacingMultiplier="1.4"/>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <org.maplibre.android.maps.MapView
+        android:id="@+id/nav_map" android:layout_width="match_parent" android:layout_height="match_parent"/>
+
+    <!-- top banner -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_gravity="top" android:layout_margin="10dp"
+        android:background="@drawable/bg_card" android:orientation="vertical"
+        android:padding="14dp" android:elevation="8dp">
+        <TextView android:id="@+id/banner_next" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textSize="20sp" android:textStyle="bold" android:textColor="@color/primary"/>
+        <TextView android:id="@+id/banner_eta" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textSize="13sp" android:textColor="@color/text_secondary" android:layout_marginTop="4dp"/>
+        <TextView android:id="@+id/next_info" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textSize="13sp" android:textColor="@color/text_main" android:layout_marginTop="2dp"/>
+        <TextView android:id="@+id/approx_note" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="@string/approx_note" android:textSize="10sp" android:textColor="#B26A00"
+            android:visibility="gone" android:layout_marginTop="6dp"/>
+    </LinearLayout>
+
+    <!-- speed chip -->
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_gravity="end|center_vertical" android:layout_margin="10dp"
+        android:background="@drawable/bg_card" android:orientation="vertical"
+        android:padding="10dp" android:elevation="6dp">
+        <TextView android:id="@+id/speed_view" android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/text_main"
+            android:gravity="center" android:minWidth="54dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="km/h" android:textSize="10sp" android:textColor="@color/text_secondary"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <!-- bottom controls -->
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start" android:layout_margin="14dp"
+        android:orientation="horizontal" android:elevation="8dp">
+        <ImageButton android:id="@+id/btn_stop" android:layout_width="56dp" android:layout_height="56dp"
+            android:src="@drawable/ic_back" android:background="@drawable/bg_button"
+            android:rotation="135" android:contentDescription="@string/stop_nav"/>
+        <ImageButton android:id="@+id/btn_sound" android:layout_width="56dp" android:layout_height="56dp"
+            android:layout_marginStart="12dp" android:src="@drawable/ic_weather"
+            android:background="@drawable/bg_card" android:contentDescription="@string/voice_label"
+            android:alpha="0.4"/>
+        <ImageButton android:id="@+id/btn_sim" android:layout_width="56dp" android:layout_height="56dp"
+            android:layout_marginStart="12dp" android:src="@drawable/ic_nav"
+            android:background="@drawable/bg_card" android:contentDescription="@string/sim_label"/>
+    </LinearLayout>
+</FrameLayout>
